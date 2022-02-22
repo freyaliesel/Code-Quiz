@@ -3,8 +3,6 @@ var containerEl = document.getElementById("container");
 var contentEl = document.getElementById("content");
 var startBtn = document.getElementById("startquiz");
 
-console.log(document.body.children);
-
 // create some new html objects
 var btns = ["A", "B", "C", "D"];
 for (var btn of btns) {
@@ -15,13 +13,12 @@ for (var btn of btns) {
     btnEl.style.margin = ".25em 0";
     btnEl.style.display = "none";  
 }
-console.log(document.body.children[1].children);
 
 // testing outside button presses
 
 const questions = [
     {
-        query: "First Question",
+        question: "First Question",
         options: [
             "Correct Answer",
             "Incorrect Answer",
@@ -32,7 +29,6 @@ const questions = [
     },
 ];
 
-console.log(questions);
 
 // sets game state, starts timer, and prompts the questions
 function startQuiz() {
@@ -56,26 +52,30 @@ function setGameState() {
 }
 
 
-function checkAnswer() {
+function checkAnswer(event) {
     console.log(`checking answer`);
-
+    // console.log(event);
+    // console.log(event.srcElement.firstChild.nodeValue);
+    var choice = event.srcElement.firstChild.nodeValue;
+    console.log(choice);
+    
 }
 
 // quiz portion function - Do this first
 function showQuestions() {
     console.log(`show questions`);
     var btnEls = document.querySelectorAll("button");
-    console.log(btnEls);
-
+   
     // display the question
     for (i = 0; i < questions.length; i++) {
-        contentEl.textContent = questions[i].query;
-        // display the options
+        contentEl.textContent = questions[i].question;
+        // put the options on buttons
         for (j = 0; j < btnEls.length; j++) {
             btnEls[j].textContent = questions[i].options[j];
             btnEls[j].style.display = "block";
-            btnEls[j].addEventListener("click", function () {
-                checkAnswer();
+            btnEls[j].addEventListener("click", function(event) {
+                console.log(`Option button was clicked`)
+                checkAnswer(event, i);
             });
         }
     }
