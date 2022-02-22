@@ -75,7 +75,7 @@ function showQuestions() {
             btnEls[j].style.display = "block";
             btnEls[j].addEventListener("click", function(event) {
                 console.log(`Option button was clicked`)
-                checkAnswer(event, i);
+                checkAnswer(event);
             });
         }
     }
