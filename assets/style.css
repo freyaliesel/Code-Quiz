@@ -9,6 +9,15 @@
     border: black solid 3px;
     margin: 0 auto;
     padding: 1em;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#options {
+    justify-self: flex-start;
+    flex-direction: column;
+    flex-grow: 0;
 }
 
 /* Style the buttons */
@@ -21,4 +30,20 @@
     margin: 0 auto;
 }
 
+#box {
+    position: absolute;
+    top: 320px;
+    right: 10px;
+    background-color: black;
+    min-width: 100px;
+    height: 100px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+#timer {
+    color: white;
+    font-size: 30px;
+    display: flex;
+}
 /* Make it mobile friendly */

@@ -1,7 +1,11 @@
 // get access to the html objects
-var containerEl = document.getElementById("container");
+var containerEl = document.getElementById("options");
 var contentEl = document.getElementById("content");
 var startBtn = document.getElementById("startquiz");
+var boxEl = document.getElementById("box");
+var timerEl = document.getElementById("timer");
+
+
 
 // create some new html objects
 var btns = ["A", "B", "C", "D"];
@@ -9,8 +13,9 @@ for (var btn of btns) {
     var btnEl = document.createElement("button");
     containerEl.appendChild(btnEl);
     btnEl.textContent = btn;
+    btnEl.className = "choiceBtn"
     btnEl.style.padding = ".25em, 1em";
-    btnEl.style.margin = ".25em 0";
+    btnEl.style.margin = ".25em .25em";
     btnEl.style.display = "none";
 }
 var btnEls = document.querySelectorAll("button");
@@ -54,6 +59,7 @@ function startQuiz() {
     setGameState();
 
     // call the timer
+    setTimer();
     // start the game
     showQuestion();
 }
@@ -66,10 +72,28 @@ function setGameState() {
     // clear the paragraph contents
     contentEl.textContent = "testing";
     // add buttons for answers
+    boxEl.style.display = "flex";
 }
 
 // timer function - integrate after implementing the basic quiz
+function setTimer() {
+    console.log(`Timer started`);
+    timeLeft = 10 * questions.length;
+    console.log(`time left is ${timeLeft}`);
 
+    timerInterval = setInterval(function() {
+        timeLeft--;
+
+        // when timer ends, game is over
+        if (timeLeft === 0) {
+            clearInterval(timerInterval);
+            console.log(`time is up`);
+        }
+
+    }, 1000);
+
+
+}
 
 
 // check to see if user was correct, advance to next question
