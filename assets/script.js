@@ -11,8 +11,15 @@ for (var btn of btns) {
     btnEl.textContent = btn;
     btnEl.style.padding = ".25em, 1em";
     btnEl.style.margin = ".25em 0";
-    btnEl.style.display = "none";  
+    btnEl.style.display = "none";
 }
+var btnEls = document.querySelectorAll("button");
+
+// quiz variables
+var index = 0;
+var gameOver = false;
+var timeLeft;
+var timerInterval;
 
 // testing outside button presses
 
@@ -27,8 +34,17 @@ const questions = [
         ],
         answer: "Correct Answer",
     },
+    {
+        question: "Second Question",
+        options: [
+            "Wrong Answer",
+            "Incorrect Answer",
+            "Right Answer",
+            "Bad Answer",
+        ],
+        answer: "Right Answer",
+    },
 ];
-
 
 // sets game state, starts timer, and prompts the questions
 function startQuiz() {
@@ -39,9 +55,10 @@ function startQuiz() {
 
     // call the timer
     // start the game
-    showQuestions();
+    showQuestion();
 }
 
+// prepare for the game to start
 function setGameState() {
     console.log(`setting game state`);
     // remove the start button
@@ -51,39 +68,59 @@ function setGameState() {
     // add buttons for answers
 }
 
+// timer function - integrate after implementing the basic quiz
 
+
+
+// check to see if user was correct, advance to next question
 function checkAnswer(event) {
     console.log(`checking answer`);
-    // console.log(event);
-    // console.log(event.srcElement.firstChild.nodeValue);
-    var choice = event.srcElement.firstChild.nodeValue;
-    console.log(choice);
-    
-}
-
-// quiz portion function - Do this first
-function showQuestions() {
-    console.log(`show questions`);
-    var btnEls = document.querySelectorAll("button");
-   
-    // display the question
-    for (i = 0; i < questions.length; i++) {
-        contentEl.textContent = questions[i].question;
-        // put the options on buttons
-        for (j = 0; j < btnEls.length; j++) {
-            btnEls[j].textContent = questions[i].options[j];
-            btnEls[j].style.display = "block";
-            btnEls[j].addEventListener("click", function(event) {
-                console.log(`Option button was clicked`)
-                checkAnswer(event);
-            });
+    if (event.target.nodeName.toLowerCase() === "button") {
+        var choice = event.target.textContent;
+        console.log(choice, index);
+        if (choice == questions[index].answer) {
+            index++;
+            console.log(`correct!`);
+            showQuestion();
+        } else {
+            index++;
+            console.log(`wrong!`);
+            showQuestion();
         }
     }
 }
 
-// timer function - integrate after implementing the basic quiz
+// need to change this below into if/else instead of a loop
+// quiz portion function - Do this first
+function showQuestion() {
+    console.log(`show question`);
+    console.log(index);
+
+    // display the question
+    if (!gameOver) {
+        contentEl.textContent = questions[index].question;
+        // put the options on buttons
+        for (i = 0; i < btnEls.length; i++) {
+            btnEls[i].textContent = questions[index].options[i];
+            btnEls[i].style.display = "block";
+        }
+    } else {
+        calculateScore();
+    }
+}
+
+// determine how the user did
+function calculateScore() {
+    console.log(`calculating score`);
+}
 
 // score tracking
+
+// delegated event listener for quiz buttons
+containerEl.addEventListener("click", function (event) {
+    console.log(`Container was clicked`);
+    checkAnswer(event, index);
+});
 
 // event listener for button to start quiz
 startBtn.addEventListener("click", function () {
