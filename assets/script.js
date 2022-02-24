@@ -91,6 +91,7 @@ function setTimer() {
             timerEl.textContent = timeLeft;
             clearInterval(timerInterval);
             console.log(`time is up`);
+            console.log(`this is coming from setTimer`);
             calculateScore();
         }
         if (timeLeft < 0) {
@@ -117,6 +118,7 @@ function checkAnswer(event) {
             timeLeft += -5;
             timerInterval = timeLeft;
             console.log(`wrong!`);
+            console.log(`this is coming from checkAnswer`);
             showQuestion();
         }
     }
@@ -125,7 +127,7 @@ function checkAnswer(event) {
 // quiz portion function - Do this first
 function showQuestion() {
     console.log(`show question`);
-    console.log(index);
+    console.log(`on question index ${index}`);
 
     // display the question
     if (index < questions.length) {
@@ -145,55 +147,57 @@ function showQuestion() {
 function calculateScore() {
     console.log(`calculating score`);
     clearInterval(timerInterval);
+    // hide elements not in use
     timerBoxEl.style.display = "none";
     optionsEl.style.display = "none";
-    contentEl.insertAdjacentHTML('beforebegin', '<h2>Quiz Complete</h2>');
+    // add an H2
+    contentEl.insertAdjacentHTML("beforebegin", "<h2>Quiz Complete</h2>");
+    // show the score
     contentEl.textContent = `Your Score: ${timeLeft}`;
-   
+    // show the form to submit score
     document.querySelector("form").style.display = "block";
-    document.getElementById("score-submit-btn").addEventListener("click", submitScore);
-
+    // add event listener to the submit score button
+    document
+        .getElementById("score-submit-btn")
+        .addEventListener("click", submitScore);
 }
 
 function submitScore(event) {
     event.preventDefault();
     console.log(`submitting score`);
+    // get the contents of the form
     var initialsEl = document.getElementById("initials");
     // check user submitted valid initials before creating score
     var highScores = [];
-    if (initialsEl.value && initialsEl.value.length <= 4 && initialsEl.value.length > 0) {
+    if (initialsEl.value.length <= 4 && initialsEl.value.length > 1) {
+        // put the current score into an object
         var result = {
             name: initialsEl.value,
             score: timeLeft,
         };
         highScores.push(result);
         console.log(highScores);
-    }
-    else {
+        // check if there are already scores saved
+        var savedScores = JSON.parse(localStorage.getItem("highScores"));
+        if (savedScores !== null) {
+            console.log(savedScores);
+            highScores = highScores.concat(savedScores);
+            console.log(highScores);
+            localStorage.setItem("highScores", JSON.stringify(highScores));
+        } else {
+            localStorage.setItem("highScores", JSON.stringify(highScores));
+            displayHighScores();
+        }
+
+    } else {
         console.log(`please enter initials`);
     }
-    // check if there are already scores saved
-    var savedScores = JSON.parse(localStorage.getItem("highScores"));
-    if (savedScores !== null) {
-        console.log(savedScores);
-        highScores = highScores.concat(savedScores);
-        console.log(highScores);
-        localStorage.setItem("highScores", JSON.stringify(highScores));
-        
-    }
-    else {
-        localStorage.setItem("highScores", JSON.stringify(highScores));
-    }
-
-    displayHighScores()
 }
 
 function displayHighScores() {
-    console.log(`displaying high scores`)
+    console.log(`displaying high scores`);
     window.location.href = "./highscores.html";
 }
-
-
 
 // delegated event listener for quiz buttons
 optionsEl.addEventListener("click", function (event) {
