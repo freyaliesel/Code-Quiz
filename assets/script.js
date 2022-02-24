@@ -140,7 +140,7 @@ function checkAnswer(event) {
         } else {
             index++;
             timeLeft += -5;
-            timerInterval = timeLeft;
+            timerEl.textContent = timeLeft;
             console.log(`wrong!`);
             console.log(`this is coming from checkAnswer`);
             showQuestion();
