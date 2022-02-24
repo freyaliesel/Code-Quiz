@@ -47,6 +47,36 @@ const questions = [
         ],
         answer: "Right Answer",
     },
+    {
+        question: "Third Question",
+        options: [
+            "Wrong Answer",
+            "Genuine Answer",
+            "Incorrect Answer",
+            "Bad Answer",
+        ],
+        answer: "Genuine Answer",
+    },
+    {
+        question: "Fourth Question",
+        options: [
+            "Bad Answer",
+            "Wrong Answer",
+            "Good Answer",
+            "Incorrect Answer",
+        ],
+        answer: "Good Answer",
+    },
+    {
+        question: "Fifth Question",
+        options: [
+            "Wrong Answer",
+            "Bad Answer",
+            "Incorrect Answer",
+            "Accurate Answer",
+        ],
+        answer: "Accurate Answer",
+    },
 ];
 
 // sets game state, starts timer, and prompts the questions
@@ -55,7 +85,6 @@ function startQuiz() {
 
     // prepare the page for the game
     setGameState();
-
     // call the timer
     setTimer();
     // start the game
@@ -94,11 +123,6 @@ function setTimer() {
             console.log(`this is coming from setTimer`);
             calculateScore();
         }
-        if (timeLeft < 0) {
-            timeLeft = 0;
-            timerEl.textContent = timeLeft;
-            clearInterval(timerInterval);
-        }
     }, 1000);
 }
 
@@ -135,7 +159,8 @@ function showQuestion() {
         // put the options on buttons
         for (i = 0; i < btnEls.length; i++) {
             btnEls[i].textContent = questions[index].options[i];
-            btnEls[i].style.display = "block";
+            if (btnEls[i].style.display != "block")
+                btnEls[i].style.display = "block";
         }
     } else {
         console.log(`This is coming from showQuestion`);
@@ -147,6 +172,8 @@ function showQuestion() {
 function calculateScore() {
     console.log(`calculating score`);
     clearInterval(timerInterval);
+    //score cannot be less than 0
+    if (timeLeft < 0) timeLeft = 0; 
     // hide elements not in use
     timerBoxEl.style.display = "none";
     optionsEl.style.display = "none";
@@ -188,7 +215,6 @@ function submitScore(event) {
             localStorage.setItem("highScores", JSON.stringify(highScores));
             displayHighScores();
         }
-
     } else {
         console.log(`please enter initials`);
     }
