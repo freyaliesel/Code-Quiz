@@ -3,14 +3,16 @@ var listEl = document.querySelector("ol");
 var backBtn = document.querySelector("#back-btn");
 var clrScoreBtn = document.querySelector("#clear-scores");
 
-console.log(highScores);
-
 if (highScores !== null){
 // sort the high scores so the greatest score value is at index 0
 highScores.sort((a, b) => (a.score < b.score ? 1 : b.score < a.score ? -1 : 0));
 console.log(highScores);
 
 displayScores();
+}
+else {
+    clrScoreBtn.style.display = "none";
+    document.querySelector("h1").insertAdjacentHTML('afterend', '<p>Take the quiz to see your score!</p>');
 }
 
 function displayScores() {
@@ -35,9 +37,5 @@ backBtn.addEventListener("click", function () {
 clrScoreBtn.addEventListener("click", function () {
     console.log(`clearing high scores`);
     localStorage.clear();
-
-    var list = document.querySelectorAll("li");
-    for (i = 0; i < list.length; i++){
-        list[i].parentNode.removeChild(list[i]);
-    }
+    location.reload();
 });
