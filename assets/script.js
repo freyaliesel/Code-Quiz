@@ -189,7 +189,8 @@ function submitScore(event) {
 }
 
 function displayHighScores() {
-    
+    console.log(`displaying high scores`)
+    window.location.href = "./highscores.html";
 }
 
 
