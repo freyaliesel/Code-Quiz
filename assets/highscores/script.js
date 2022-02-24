@@ -3,17 +3,10 @@ var listEl = document.querySelector("ul");
 
 console.log(highScores);
 
-// function to compare properties of the objects in the high score array
-function compare(a, b) {
-    if (a.score > b.score) {
-        return -1;
-    }
-    if (a.score < b.score) {
-        return 1;
-    }
-    return 0;
-}
-highScores.sort(compare);
+// sort the high scores so the greatest score value is at index 0
+highScores.sort((a,b) => (a.score < b.score) ? 1 : ((b.score < a.score) ? -1 : 0))
+
+
 console.log(highScores);
 
 function displayScores() {
