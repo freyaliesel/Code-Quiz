@@ -1,19 +1,17 @@
 // get access to the html objects
-var containerEl = document.getElementById("options");
+var optionsEl = document.getElementById("options");
 var contentEl = document.getElementById("content");
 var startBtn = document.getElementById("startquiz");
-var boxEl = document.getElementById("box");
+var timerBoxEl = document.getElementById("timer-box");
 var timerEl = document.getElementById("timer");
-
-
 
 // create some new html objects
 var btns = ["A", "B", "C", "D"];
 for (var btn of btns) {
     var btnEl = document.createElement("button");
-    containerEl.appendChild(btnEl);
+    optionsEl.appendChild(btnEl);
     btnEl.textContent = btn;
-    btnEl.className = "choiceBtn"
+    btnEl.className = "choiceBtn";
     btnEl.style.padding = ".25em, 1em";
     btnEl.style.margin = ".25em .25em";
     btnEl.style.display = "none";
@@ -69,32 +67,39 @@ function setGameState() {
     console.log(`setting game state`);
     // remove the start button
     startBtn.parentNode.removeChild(startBtn);
-    // clear the paragraph contents
-    contentEl.textContent = "testing";
     // add buttons for answers
-    boxEl.style.display = "flex";
+    timerBoxEl.style.display = "flex";
 }
 
 // timer function - integrate after implementing the basic quiz
 function setTimer() {
     console.log(`Timer started`);
-    timeLeft = 10 * questions.length;
+    timeLeft = 5 * questions.length;
     console.log(`time left is ${timeLeft}`);
-
-    timerInterval = setInterval(function() {
+    timerEl.textContent = timeLeft;
+    timerInterval = setInterval(function () {
         timeLeft--;
-
+        timerEl.textContent = timeLeft;
         // when timer ends, game is over
+        if (timeLeft <= 10) {
+            timerEl.style.color = "yellow";
+        }
+        if (timeLeft <= 5) {
+            timerEl.style.color = "red";
+        }
         if (timeLeft === 0) {
+            timerEl.textContent = timeLeft;
             clearInterval(timerInterval);
             console.log(`time is up`);
+            calculateScore();
         }
-
+        if (timeLeft < 0) {
+            timeLeft = 0;
+            timerEl.textContent = timeLeft;
+            clearInterval(timerInterval);
+        }
     }, 1000);
-
-
 }
-
 
 // check to see if user was correct, advance to next question
 function checkAnswer(event) {
@@ -102,26 +107,28 @@ function checkAnswer(event) {
     if (event.target.nodeName.toLowerCase() === "button") {
         var choice = event.target.textContent;
         console.log(choice, index);
+
         if (choice == questions[index].answer) {
             index++;
             console.log(`correct!`);
             showQuestion();
         } else {
             index++;
+            timeLeft += -5;
+            timerInterval = timeLeft;
             console.log(`wrong!`);
             showQuestion();
         }
     }
 }
 
-// need to change this below into if/else instead of a loop
 // quiz portion function - Do this first
 function showQuestion() {
     console.log(`show question`);
     console.log(index);
 
     // display the question
-    if (!gameOver) {
+    if (index < questions.length) {
         contentEl.textContent = questions[index].question;
         // put the options on buttons
         for (i = 0; i < btnEls.length; i++) {
@@ -129,6 +136,7 @@ function showQuestion() {
             btnEls[i].style.display = "block";
         }
     } else {
+        console.log(`This is coming from showQuestion`);
         calculateScore();
     }
 }
@@ -136,18 +144,28 @@ function showQuestion() {
 // determine how the user did
 function calculateScore() {
     console.log(`calculating score`);
+    clearInterval(timerInterval);
+    timerBoxEl.style.display = "none";
+    optionsEl.style.display = "none";
+    contentEl.insertAdjacentHTML('beforebegin', '<h2>Quiz Complete</h2>');
+    contentEl.textContent = `Your Score: ${timeLeft}`;
+   
+    document.querySelector("form").style.display = "block";
+    document.getElementById("score-submit-btn").addEventListener("submit", submitScore);
+
 }
 
-// score tracking
+function submitScore() {
+    console.log(`submitting score`);
+}
+
+
 
 // delegated event listener for quiz buttons
-containerEl.addEventListener("click", function (event) {
+optionsEl.addEventListener("click", function (event) {
     console.log(`Container was clicked`);
     checkAnswer(event, index);
 });
 
 // event listener for button to start quiz
-startBtn.addEventListener("click", function () {
-    console.log(`button clicked`);
-    startQuiz();
-});
+startBtn.addEventListener("click", startQuiz);
