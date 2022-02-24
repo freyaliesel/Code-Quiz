@@ -30,7 +30,7 @@
     margin: 0 auto;
 }
 
-#box {
+#timer-box {
     position: absolute;
     top: 320px;
     right: 10px;
@@ -45,5 +45,9 @@
     color: white;
     font-size: 30px;
     display: flex;
+}
+
+form {
+    display: none;
 }
 /* Make it mobile friendly */
