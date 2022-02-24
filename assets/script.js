@@ -172,8 +172,8 @@ function showQuestion() {
 function calculateScore() {
     console.log(`calculating score`);
     clearInterval(timerInterval);
-    //score cannot be less than 0
-    if (timeLeft < 0) timeLeft = 0; 
+    // score cannot be less than 0
+    if (timeLeft < 0) timeLeft = 0;
     // hide elements not in use
     timerBoxEl.style.display = "none";
     optionsEl.style.display = "none";
@@ -228,7 +228,7 @@ function displayHighScores() {
 // delegated event listener for quiz buttons
 optionsEl.addEventListener("click", function (event) {
     console.log(`Container was clicked`);
-    checkAnswer(event, index);
+    checkAnswer(event);
 });
 
 // event listener for button to start quiz
