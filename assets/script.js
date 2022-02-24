@@ -151,12 +151,45 @@ function calculateScore() {
     contentEl.textContent = `Your Score: ${timeLeft}`;
    
     document.querySelector("form").style.display = "block";
-    document.getElementById("score-submit-btn").addEventListener("submit", submitScore);
+    document.getElementById("score-submit-btn").addEventListener("click", submitScore);
 
 }
 
-function submitScore() {
+function submitScore(event) {
+    event.preventDefault();
     console.log(`submitting score`);
+    var initialsEl = document.getElementById("initials");
+    // check user submitted valid initials before creating score
+    var highScores = [];
+    if (initialsEl.value && initialsEl.value.length <= 4 && initialsEl.value.length > 0) {
+        var result = {
+            name: initialsEl.value,
+            score: timeLeft,
+        };
+        highScores.push(result);
+        console.log(highScores);
+    }
+    else {
+        console.log(`please enter initials`);
+    }
+    // check if there are already scores saved
+    var savedScores = JSON.parse(localStorage.getItem("highScores"));
+    if (savedScores !== null) {
+        console.log(savedScores);
+        highScores = highScores.concat(savedScores);
+        console.log(highScores);
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+        
+    }
+    else {
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+    }
+
+    displayHighScores()
+}
+
+function displayHighScores() {
+    
 }
 
 
