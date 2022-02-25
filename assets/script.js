@@ -109,14 +109,15 @@ function setTimer() {
     timerInterval = setInterval(function () {
         timeLeft--;
         timerEl.textContent = timeLeft;
-        // when timer ends, game is over
+        // update timer color based on how much time is left
         if (timeLeft <= 10) {
             timerEl.style.color = "yellow";
         }
         if (timeLeft <= 5) {
             timerEl.style.color = "red";
         }
-        if (timeLeft === 0) {
+        // when timer ends, game is over
+        if (timeLeft < 0) {
             timerEl.textContent = timeLeft;
             clearInterval(timerInterval);
             console.log(`time is up`);
@@ -211,6 +212,7 @@ function submitScore(event) {
             highScores = highScores.concat(savedScores);
             console.log(highScores);
             localStorage.setItem("highScores", JSON.stringify(highScores));
+            displayHighScores();
         } else {
             localStorage.setItem("highScores", JSON.stringify(highScores));
             displayHighScores();
