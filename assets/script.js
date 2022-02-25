@@ -27,104 +27,156 @@ var quizQuestions = [];
 
 const questions = [
     {
-        question: "First Question",
+        question:
+            "When a user views a page containing a JavaScript program, which machine actually executes the script?",
         options: [
-            "Correct Answer",
-            "Incorrect Answer",
-            "Wrong Answer",
-            "Bad Answer",
+            "The User's machine running a Web browser",
+            "The Web server",
+            "A central machine deep within Google's corporate offices",
+            "The cloud",
         ],
-        answer: "Correct Answer",
+        answer: "The User's machine running a Web browser",
     },
     {
-        question: "Second Question",
-        options: [
-            "Wrong Answer",
-            "Incorrect Answer",
-            "Right Answer",
-            "Bad Answer",
-        ],
-        answer: "Right Answer",
+        question: "Javascript is a(n) _______ language?",
+        options: ["Object-Based", "Procedural", "Object-Oriented", "Compiled"],
+        answer: "Object-Oriented",
     },
     {
-        question: "Third Question",
-        options: [
-            "Wrong Answer",
-            "Genuine Answer",
-            "Incorrect Answer",
-            "Bad Answer",
-        ],
-        answer: "Genuine Answer",
+        question:
+            "When an operator’s value is NULL, the typeof returned by the unary operator is:",
+        options: ["Boolean", "Undefined", "Object", "Integer"],
+        answer: "Object",
     },
     {
-        question: "Fourth Question",
-        options: [
-            "Bad Answer",
-            "Wrong Answer",
-            "Good Answer",
-            "Incorrect Answer",
-        ],
-        answer: "Good Answer",
+        question:
+            "Which function is used to serialize an object into a JSON string in Javascript?",
+        options: ["stringify()", "parse()", "convert()", "toString()"],
+        answer: "stringify()",
     },
     {
-        question: "Fifth Question",
-        options: [
-            "Wrong Answer",
-            "Bad Answer",
-            "Incorrect Answer",
-            "Accurate Answer",
-        ],
-        answer: "Accurate Answer",
+        question: "Which is not a Javascript framework?",
+        options: ["Node", "Vue", "React", "Cassandra"],
+        answer: "Cassandra",
     },
     {
-        question: "Sixth Question",
+        question: "Which stops an interval timer in Javascript?",
         options: [
-            "Correct Answer",
-            "Incorrect Answer",
-            "Wrong Answer",
-            "Bad Answer",
+            "clearInterval()",
+            "clearTimer()",
+            "intervalOver()",
+            "setTimeout()",
         ],
-        answer: "Correct Answer",
+        answer: "clearInterval()",
     },
     {
-        question: "Seventh Question",
-        options: [
-            "Wrong Answer",
-            "Incorrect Answer",
-            "Right Answer",
-            "Bad Answer",
-        ],
-        answer: "Right Answer",
+        question: "How do you write a comment in Javascript?",
+        options: ["/* Comment */", "// Comment", "# Comment", "$ Comment $"],
+        answer: "// Comment",
     },
     {
-        question: "Eighth Question",
-        options: [
-            "Wrong Answer",
-            "Genuine Answer",
-            "Incorrect Answer",
-            "Bad Answer",
-        ],
-        answer: "Genuine Answer",
+        question:
+            "Which built-in method adds one or more elements to the end of an array and returns the new length of the array?",
+        options: ["last()", "put()", "push()", "shift()"],
+        answer: "push()",
     },
     {
-        question: "Ninth Question",
-        options: [
-            "Bad Answer",
-            "Wrong Answer",
-            "Good Answer",
-            "Incorrect Answer",
-        ],
-        answer: "Good Answer",
+        question:
+            "Which of the following functions returns a string value version of the current number?",
+        options: ["toString()", "toFixed()", "toLocaleString()", "stringify()"],
+        answer: "toString()",
     },
     {
-        question: "Tenth Question",
+        question:
+            "Which function returns the characters in a string, beginning at the specified location through the specified number of characters?",
+        options: ["slice()", "split()", "substr()", "search()"],
+        answer: "substr()",
+    },
+    {
+        question:
+            "Which function adds one or more elements to the end of an array and returns the new length of the array?",
+        options: ["pop()", "push()", "join()", "map()"],
+        answer: "push()",
+    },
+    {
+        question: "Which symbol is used to separate JavaScript statements?",
+        options: ["Comma ','", "Colon ';'", "Hyphen '-'", "Semicolon ';'"],
+        answer: "Semicolon ';'",
+    },
+    {
+        question: "What is the default value of an uninitialized variable?",
+        options: ["0", "undefined", "null", "NaN"],
+        answer: "undefined",
+    },
+    {
+        question: "In JavaScript, arrays are written with:",
         options: [
-            "Wrong Answer",
-            "Bad Answer",
-            "Incorrect Answer",
-            "Accurate Answer",
+            "round brackets ()",
+            "curly brackets {}",
+            'double quotes ""',
+            "square brackets []",
         ],
-        answer: "Accurate Answer",
+        answer: "square brackets []",
+    },
+    {
+        question: "JavaScript objects are written with:",
+        options: [
+            "round brackets ()",
+            "curly brackets {}",
+            'double quotes ""',
+            "square brackets []",
+        ],
+        answer: "curly brackets {}",
+    },
+    {
+        question: "Which property is used to get the length of a string in JavaScript?",
+        options: [
+            ".strlen", 
+            ".len", 
+            ".length", 
+            ".stringLength",
+        ],
+        answer: "length",
+    },
+    {
+        question: "Which character is used to break up a code line within a text string?",
+        options: [
+            "Single quote '", 
+            "Single backslash \\", 
+            'Double quote "', 
+            "Back-tick `",
+        ],
+        answer: "Single backslash \\",
+    },
+    {
+        question: 'In JavaScript, the string template literals use _____ rather than quotes ("") to define a string',
+        options: [
+            "Single quotes ''", 
+            "Backslash with single quote \\'\\'", 
+            "Backslashes \\\\", 
+            "Back-ticks ``",
+        ],
+        answer: "Back-ticks ``",
+    },
+    {
+        question: "Which JavaScript method is used to create a new array with array elements that pass a test?",
+        options: [
+            "forEach()", 
+            "map()", 
+            "forMap()", 
+            "filter()",
+        ],
+        answer: "filter()",
+    },
+    {
+        question: "Which is not a JavaScript data type?",
+        options: [
+            "Undefined", 
+            "Number", 
+            "Boolean", 
+            "Float",
+        ],
+        answer: "Float",
     },
 ];
 
@@ -202,9 +254,11 @@ function showQuestion() {
     // display the question
     if (index < quizQuestions.length) {
         contentEl.textContent = quizQuestions[index].question;
-        console.log(quizQuestions[index].options)
+        console.log(quizQuestions[index].options);
         // shuffle the options order
-        quizQuestions[index].options = quizQuestions[index].options.sort(() => Math.random() - 0.5)
+        quizQuestions[index].options = quizQuestions[index].options.sort(
+            () => Math.random() - 0.5
+        );
         // put the options on buttons
         for (i = 0; i < btnEls.length; i++) {
             btnEls[i].textContent = quizQuestions[index].options[i];
