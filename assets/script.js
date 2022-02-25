@@ -195,13 +195,16 @@ function selectQuestions() {
     console.log(quizQuestions);
 }
 
-// quiz portion function - Do this first
+// Displays the quiz
 function showQuestion() {
     console.log(`show question`);
     console.log(`on question index ${index}`);
     // display the question
     if (index < quizQuestions.length) {
         contentEl.textContent = quizQuestions[index].question;
+        console.log(quizQuestions[index].options)
+        // shuffle the options order
+        quizQuestions[index].options = quizQuestions[index].options.sort(() => Math.random() - 0.5)
         // put the options on buttons
         for (i = 0; i < btnEls.length; i++) {
             btnEls[i].textContent = quizQuestions[index].options[i];
