@@ -128,6 +128,26 @@ function displayTimeLeft() {
     }
 }
 
+// quiz portion function - Do this first
+function showQuestion() {
+    console.log(`show question`);
+    console.log(`on question index ${index}`);
+
+    // display the question
+    if (index < questions.length) {
+        contentEl.textContent = questions[index].question;
+        // put the options on buttons
+        for (i = 0; i < btnEls.length; i++) {
+            btnEls[i].textContent = questions[index].options[i];
+            if (btnEls[i].style.display != "block")
+                btnEls[i].style.display = "block";
+        }
+    } else {
+        console.log(`This is coming from showQuestion`);
+        calculateScore();
+    }
+}
+
 // check to see if user was correct, advance to next question
 function checkAnswer(event) {
     console.log(`checking answer`);
@@ -148,26 +168,6 @@ function checkAnswer(event) {
             console.log(`this is coming from checkAnswer`);
             showQuestion();
         }
-    }
-}
-
-// quiz portion function - Do this first
-function showQuestion() {
-    console.log(`show question`);
-    console.log(`on question index ${index}`);
-
-    // display the question
-    if (index < questions.length) {
-        contentEl.textContent = questions[index].question;
-        // put the options on buttons
-        for (i = 0; i < btnEls.length; i++) {
-            btnEls[i].textContent = questions[index].options[i];
-            if (btnEls[i].style.display != "block")
-                btnEls[i].style.display = "block";
-        }
-    } else {
-        console.log(`This is coming from showQuestion`);
-        calculateScore();
     }
 }
 
