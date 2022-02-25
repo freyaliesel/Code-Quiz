@@ -1,4 +1,4 @@
-// get access to the html objects
+// get access to the existing html objects
 var optionsEl = document.getElementById("options");
 var contentEl = document.getElementById("content");
 var startBtn = document.getElementById("startquiz");
@@ -16,7 +16,7 @@ for (var btn of btns) {
     btnEl.style.margin = ".25em .25em";
     btnEl.style.display = "none";
 }
-var btnEls = document.querySelectorAll("button");
+var btnEls = document.querySelectorAll(".choiceBtn");
 
 // quiz variables
 var index = 0;
@@ -82,7 +82,6 @@ const questions = [
 // sets game state, starts timer, and prompts the questions
 function startQuiz() {
     console.log(`start the quiz`);
-
     // prepare the page for the game
     setGameState();
     // call the timer
@@ -105,26 +104,28 @@ function setTimer() {
     console.log(`Timer started`);
     timeLeft = 5 * questions.length;
     console.log(`time left is ${timeLeft}`);
-    timerEl.textContent = timeLeft;
+    displayTimeLeft();
     timerInterval = setInterval(function () {
         timeLeft--;
-        timerEl.textContent = timeLeft;
-        // update timer color based on how much time is left
-        if (timeLeft <= 10) {
-            timerEl.style.color = "yellow";
-        }
-        if (timeLeft <= 5) {
-            timerEl.style.color = "red";
-        }
-        // when timer ends, game is over
+        displayTimeLeft();
         if (timeLeft < 0) {
-            timerEl.textContent = timeLeft;
             clearInterval(timerInterval);
             console.log(`time is up`);
             console.log(`this is coming from setTimer`);
             calculateScore();
         }
     }, 1000);
+}
+
+// update the timer based on how much time is left
+function displayTimeLeft() {
+    // update timer color based on how much time is left
+    timerEl.textContent = timeLeft;
+    if (timeLeft <= 5) {
+        timerEl.style.color = "red";
+    } else if (timeLeft <= 10) {
+        timerEl.style.color = "yellow";
+    }
 }
 
 // check to see if user was correct, advance to next question
@@ -141,7 +142,8 @@ function checkAnswer(event) {
         } else {
             index++;
             timeLeft += -5;
-            timerEl.textContent = timeLeft;
+            if (timeLeft < 0) timeLeft = 0;
+            displayTimeLeft();
             console.log(`wrong!`);
             console.log(`this is coming from checkAnswer`);
             showQuestion();
