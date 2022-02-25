@@ -23,8 +23,7 @@ var index = 0;
 var gameOver = false;
 var timeLeft;
 var timerInterval;
-
-// testing outside button presses
+var quizQuestions = [];
 
 const questions = [
     {
@@ -77,6 +76,56 @@ const questions = [
         ],
         answer: "Accurate Answer",
     },
+    {
+        question: "Sixth Question",
+        options: [
+            "Correct Answer",
+            "Incorrect Answer",
+            "Wrong Answer",
+            "Bad Answer",
+        ],
+        answer: "Correct Answer",
+    },
+    {
+        question: "Seventh Question",
+        options: [
+            "Wrong Answer",
+            "Incorrect Answer",
+            "Right Answer",
+            "Bad Answer",
+        ],
+        answer: "Right Answer",
+    },
+    {
+        question: "Eighth Question",
+        options: [
+            "Wrong Answer",
+            "Genuine Answer",
+            "Incorrect Answer",
+            "Bad Answer",
+        ],
+        answer: "Genuine Answer",
+    },
+    {
+        question: "Ninth Question",
+        options: [
+            "Bad Answer",
+            "Wrong Answer",
+            "Good Answer",
+            "Incorrect Answer",
+        ],
+        answer: "Good Answer",
+    },
+    {
+        question: "Tenth Question",
+        options: [
+            "Wrong Answer",
+            "Bad Answer",
+            "Incorrect Answer",
+            "Accurate Answer",
+        ],
+        answer: "Accurate Answer",
+    },
 ];
 
 // sets game state, starts timer, and prompts the questions
@@ -97,6 +146,8 @@ function setGameState() {
     startBtn.parentNode.removeChild(startBtn);
     // add buttons for answers
     timerBoxEl.style.display = "flex";
+    // randomize question selection
+    selectQuestions();
 }
 
 // timer function - integrate after implementing the basic quiz
@@ -128,17 +179,32 @@ function displayTimeLeft() {
     }
 }
 
+// randomizes the questions selected for the quiz
+function selectQuestions() {
+    console.log(`selecting questions`);
+    var tmp = [];
+    while (quizQuestions.length < 5) {
+        tmp.push(
+            questions.splice(
+                Math.floor(Math.random() * questions.length - 1),
+                1
+            )[0]
+        );
+        quizQuestions.push(tmp.pop());
+    }
+    console.log(quizQuestions);
+}
+
 // quiz portion function - Do this first
 function showQuestion() {
     console.log(`show question`);
     console.log(`on question index ${index}`);
-
     // display the question
-    if (index < questions.length) {
-        contentEl.textContent = questions[index].question;
+    if (index < quizQuestions.length) {
+        contentEl.textContent = quizQuestions[index].question;
         // put the options on buttons
         for (i = 0; i < btnEls.length; i++) {
-            btnEls[i].textContent = questions[index].options[i];
+            btnEls[i].textContent = quizQuestions[index].options[i];
             if (btnEls[i].style.display != "block")
                 btnEls[i].style.display = "block";
         }
@@ -155,7 +221,7 @@ function checkAnswer(event) {
         var choice = event.target.textContent;
         console.log(choice, index);
 
-        if (choice == questions[index].answer) {
+        if (choice == quizQuestions[index].answer) {
             index++;
             console.log(`correct!`);
             showQuestion();
