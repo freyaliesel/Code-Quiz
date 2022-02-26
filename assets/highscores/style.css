@@ -15,3 +15,10 @@ ol {
     margin: 0 auto;
     display: block;
 }
+
+/* Make it mobile friendly */
+@media (max-width: 690px) {
+    ol {
+         width: 300px;
+     }
+ }

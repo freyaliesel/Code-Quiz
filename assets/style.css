@@ -52,3 +52,10 @@ form {
 }
 
 /* Make it mobile friendly */
+@media (max-width: 690px) {
+    #container {
+        width: 300px;
+        display: flex;
+        align-items: center;
+    }
+}
