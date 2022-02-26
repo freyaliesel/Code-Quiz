@@ -224,9 +224,9 @@ function setTimer() {
 function displayTimeLeft() {
     // update timer color based on how much time is left
     timerEl.textContent = timeLeft;
-    if (timeLeft <= 5) {
+    if (timeLeft <= 15) {
         timerEl.style.color = "red";
-    } else if (timeLeft <= 10) {
+    } else if (timeLeft <= 30) {
         timerEl.style.color = "yellow";
     }
 }
