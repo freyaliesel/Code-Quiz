@@ -285,7 +285,7 @@ function checkAnswer(event) {
             showQuestion();
         } else {
             index++;
-            timeLeft += -5;
+            timeLeft += -10;
             if (timeLeft < 0) timeLeft = 0;
             displayTimeLeft();
             console.log(`wrong!`);
