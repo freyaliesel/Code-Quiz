@@ -17,8 +17,9 @@ if (highScores !== null) {
         .querySelector("h1")
         .insertAdjacentHTML(
             "afterend",
-            "<p>Take the quiz to see your score!</p>"
+            '<p style= "text-align: center;">Take the quiz to see your score!</p>'
         );
+        listEl.style.display = "none";
 }
 
 function displayScores() {
