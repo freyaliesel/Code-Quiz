@@ -1,6 +1,8 @@
 
 # Week 4 Homework - Code Quiz
 
+Assignment is to create a page from scratch that fulfills the following criteria.
+
 > ### User Story
 > ```
 > AS A coding bootcamp student
