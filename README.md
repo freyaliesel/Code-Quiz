@@ -22,3 +22,8 @@
 > WHEN the game is over
 > THEN I can save my initials and my score
 >```
+
+
+Program is on [github](https://github.com/freyaliesel/Code-Quiz)
+
+![Page deployed to github pages](./assets/images/live-page.png)
