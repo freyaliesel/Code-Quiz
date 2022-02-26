@@ -205,7 +205,7 @@ function setGameState() {
 // timer function - integrate after implementing the basic quiz
 function setTimer() {
     console.log(`Timer started`);
-    timeLeft = 5 * questions.length;
+    timeLeft = 15 * quizQuestions.length;
     console.log(`time left is ${timeLeft}`);
     displayTimeLeft();
     timerInterval = setInterval(function () {
