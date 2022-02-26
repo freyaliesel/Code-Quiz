@@ -38,7 +38,7 @@ const questions = [
         answer: "The User's machine running a Web browser",
     },
     {
-        question: "Javascript is a(n) _______ language?",
+        question: "JavaScript is a(n) _______ language?",
         options: ["Object-Based", "Procedural", "Object-Oriented", "Compiled"],
         answer: "Object-Oriented",
     },
@@ -50,17 +50,17 @@ const questions = [
     },
     {
         question:
-            "Which function is used to serialize an object into a JSON string in Javascript?",
+            "Which function is used to serialize an object into a JSON string in JavaScript?",
         options: ["stringify()", "parse()", "convert()", "toString()"],
         answer: "stringify()",
     },
     {
-        question: "Which is not a Javascript framework?",
+        question: "Which is not a JavaScript framework?",
         options: ["Node", "Vue", "React", "Cassandra"],
         answer: "Cassandra",
     },
     {
-        question: "Which stops an interval timer in Javascript?",
+        question: "Which stops an interval timer in JavaScript?",
         options: [
             "clearInterval()",
             "clearTimer()",
@@ -70,7 +70,7 @@ const questions = [
         answer: "clearInterval()",
     },
     {
-        question: "How do you write a comment in Javascript?",
+        question: "How do you write a comment in JavaScript?",
         options: ["/* Comment */", "// Comment", "# Comment", "$ Comment $"],
         answer: "// Comment",
     },
@@ -277,7 +277,8 @@ function checkAnswer(event) {
     if (event.target.nodeName.toLowerCase() === "button") {
         var choice = event.target.textContent;
         console.log(choice, index);
-
+        //shuffle answers
+        quizQuestions[index].options.sort(() => Math.random() - 0.5);
         if (choice == quizQuestions[index].answer) {
             index++;
             console.log(`correct!`);
