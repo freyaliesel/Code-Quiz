@@ -31,7 +31,7 @@ function displayScores() {
         li.style.textAlign = "left";
         li.style.padding = "5px";
         li.style.marginLeft = "35px";
-        index % 2 == 0 ? li.style.backgroundColor = '#F5EEF8' : li.style.backgroundColor = '#EBDEF0';
+        index % 2 == 0 ? li.style.backgroundColor = '#EBDEF0' : li.style.backgroundColor = '#F5EEF8';
     }
 }
 

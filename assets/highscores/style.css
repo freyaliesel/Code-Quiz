@@ -7,4 +7,11 @@ ol {
     padding: 20px;
     background-color: #633974;
     list-style-position: inside;
+    width: 400px;
+    margin: 0 auto;
+}
+
+#clear-scores {
+    margin: 0 auto;
+    display: block;
 }
