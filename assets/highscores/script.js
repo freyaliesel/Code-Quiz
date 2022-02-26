@@ -17,8 +17,9 @@ if (highScores !== null) {
         .querySelector("h1")
         .insertAdjacentHTML(
             "afterend",
-            "<p>Take the quiz to see your score!</p>"
+            '<p style= "text-align: center;">Take the quiz to see your score!</p>'
         );
+        listEl.style.display = "none";
 }
 
 function displayScores() {
@@ -31,7 +32,7 @@ function displayScores() {
         li.style.textAlign = "left";
         li.style.padding = "5px";
         li.style.marginLeft = "35px";
-        index % 2 == 0 ? li.style.backgroundColor = '#F5EEF8' : li.style.backgroundColor = '#EBDEF0';
+        index % 2 == 0 ? li.style.backgroundColor = '#EBDEF0' : li.style.backgroundColor = '#F5EEF8';
     }
 }
 
